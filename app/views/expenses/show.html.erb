@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @expense.description %>
+</p>
+
+<p>
+  <strong>Explanation:</strong>
+  <%= @expense.explanation %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @expense.user.name %>
+</p>
+
+<p>
+  <strong>Meeting:</strong>
+  <%= @expense.meeting.meeting %>
+</p>
+
+<p>
+  <strong>Accepted:</strong>
+  <%= @expense.accepted %>
+</p>
+
+<p>
+  <strong>Bookkeeping:</strong>
+  <%= @expense.bookkeeping %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @expense.euros %> €
+</p>
+
+<%= image_tag @expense.receipt_url %>
+
+
+<%= link_to 'Edit', edit_expense_path(@expense) %> |
+<%= link_to 'Back', expenses_path %>

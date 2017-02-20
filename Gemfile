@@ -27,6 +27,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'bootstrap-sass'
 
+gem 'devise'
+
 
 # Use Unicorn as the app server
 # gem 'unicorn'

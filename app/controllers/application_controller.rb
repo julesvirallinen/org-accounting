@@ -1,14 +1,10 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  before_action :authenticate_user!
 
-  helper_method :current_user
 
-  def current_user
-    return nil if session[:user_id].nil?
-    User.find(session[:user_id])
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :name])
   end
 
-  def ensure_that_signed_in
-    redirect_to signin_path, notice:'you should be signed in' if current_user.nil?
-  end
 end

@@ -1,15 +1,27 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_filter :admin_only, only: [:index, :destroy]
+
 
   # GET /users
   # GET /users.json
+
   def index
-    @users = User.all
+    if params[:approved] == "false"
+      @users = User.where(approved: false)
+    else
+      @users = User.all
+    end
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
+
+    unless current_user.admin?
+      @user = current_user
+    end
+
   end
 
   # GET /users/new
@@ -41,7 +53,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if user_params[:username].nil? and @user == current_user and @user.update(user_params)
+      if (@user == current_user || current_user.admin?) && @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -64,13 +76,25 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    # if params[:id] = "sign_out"
+    #   sign_out current_user
+    #   return
+    # end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.require(:user).permit(:name, :username, :account_number, :password, :password_confirmation)
+    @user = User.find(params[:id])
+  end
+
+  def admin_only
+    unless current_user.admin?
+      redirect_to :root, :alert => "Access denied."
     end
+  end
+
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_params
+    params.require(:user).permit(:name, :username, :account_number, :password, :password_confirmation, :approved)
+  end
 end

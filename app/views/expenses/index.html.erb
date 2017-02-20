@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  Show:
+  <%= link_to "All", :action => "index" %>
+  <%= link_to "Not accepted", :action => "index", :accepted => "false" %>
+  <%= link_to "Missing meeting", :action => "index", :meeting => "false" %>
+  <%= link_to "Not paid", :action => "index", :unpaid => "false" %>
+
+
+</p>
+<h1>Listing Expenses</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>User</th>
+      <th>Meeting</th>
+      <th>Accepted</th>
+      <th>Amount</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @expenses.each do |expense| %>
+      <tr>
+        <td><%= expense.description %></td>
+        <td><%= expense.user.name %></td>
+        <td><%= expense.meeting.meeting %></td>
+        <td><%= expense.accepted %></td>
+        <td><%= expense.euros %></td>
+        <td><%= link_to 'Show', expense %></td>
+        <td><%= link_to 'Edit', edit_expense_path(expense) %></td>
+        <td><%= link_to 'Destroy', expense, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Expense', new_expense_path %>
