@@ -33,7 +33,7 @@
       <tr>
         <td><%= expense.description %></td>
         <td><%= expense.user.name %></td>
-        <td><%= expense.meeting.meeting %></td>
+        <td><%= expense.meeting.meeting if expense.meeting%></td>
         <td><%= expense.accepted %></td>
         <td><%= expense.euros %></td>
         <td><%= link_to 'Show', expense %></td>

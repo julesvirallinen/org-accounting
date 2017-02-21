@@ -46,6 +46,7 @@ class ExpensesController < ApplicationController
         format.html { redirect_to @expense, notice: 'Expense was successfully created.' }
         format.json { render :show, status: :created, location: @expense }
       else
+        @meetings = Meeting.all
         format.html { render :new }
         format.json { render json: @expense.errors, status: :unprocessable_entity }
       end

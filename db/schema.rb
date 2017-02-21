@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170220224407) do
+ActiveRecord::Schema.define(version: 20170220235126) do
 
   create_table "expenses", force: :cascade do |t|
     t.string   "description"
@@ -41,7 +41,6 @@ ActiveRecord::Schema.define(version: 20170220224407) do
     t.string   "name"
     t.string   "username"
     t.string   "account_number"
-    t.string   "password_digest"
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
     t.string   "email",                  default: "",    null: false
