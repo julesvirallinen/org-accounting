@@ -23,12 +23,12 @@
     </div>
 
   <div class="field">
-    <%= f.label :receipt %><br>
+    <%= f.label :receipt %> <span>Note: Tän alle pitää ilmestyä tollanen valkonen latausviiva ennen ku tää toimii, jos se ei oo siinä, päivitä sivu kunnes se on :D</span><br>
     <%= f.file_field :receipt_url %>
   </div>
   <div class="field">
     <%= f.label :meeting %><br>
-    <%= f.select :meeting_id, options_from_collection_for_select(@meetings, :id, :to_s, selected: @expense.meeting_id) %>
+    <%= f.select :meeting_id, options_from_collection_for_select(@meetings, :id, :to_s, selected: @expense.meeting_id), :include_blank => true %>
   </div>
     <div class="field">
       <%= f.label :euros %><br>

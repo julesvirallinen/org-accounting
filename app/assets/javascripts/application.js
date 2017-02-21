@@ -11,20 +11,19 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
-//= require turbolinks
 //= require jquery.turbolinks
+//= require jquery_ujs
 //= require bootstrap-sprockets
+//= require turbolinks
 //= require_tree .
-//= require jquery.ui.widget
-//= require z.jquery.fileupload
+
 
 $(function() {
     $('.directUpload').find("input:file").each(function(i, elem) {
         var fileInput    = $(elem);
         var form         = $(fileInput.parents('form:first'));
         var submitButton = form.find('input[type="submit"]');
-        var progressBar  = $("<div class='bar'></div>");
+        var progressBar  = $("<div class='bar'></div>").text("joo just tää");
         var barContainer = $("<div class='progress'></div>").append(progressBar);
         fileInput.after(barContainer);
         fileInput.fileupload({

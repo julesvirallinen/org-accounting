@@ -1,5 +1,6 @@
 class ExpensesController < ApplicationController
   before_action :set_expense, only: [:show, :edit, :update, :destroy]
+  before_action :set_meetings, only: [:edit, :update, :new, :create]
   before_action :set_s3_direct_post, only: [:new, :edit, :create, :update]
 
 
@@ -25,20 +26,16 @@ class ExpensesController < ApplicationController
   # GET /expenses/new
   def new
     @expense = Expense.new
-    @meetings = Meeting.all
   end
 
   # GET /expenses/1/edit
   def edit
-    @meetings = Meeting.all
-
   end
 
   # POST /expenses
   # POST /expenses.json
   def create
     @expense = Expense.new(expense_params)
-    @meetings = Meeting.all
 
     respond_to do |format|
       if @expense.save
@@ -46,7 +43,6 @@ class ExpensesController < ApplicationController
         format.html { redirect_to @expense, notice: 'Expense was successfully created.' }
         format.json { render :show, status: :created, location: @expense }
       else
-        @meetings = Meeting.all
         format.html { render :new }
         format.json { render json: @expense.errors, status: :unprocessable_entity }
       end
@@ -78,9 +74,15 @@ class ExpensesController < ApplicationController
   end
 
   private
+  def set_meetings
+    @meetings = Meeting.all
+  end
+
+  private
   # Use callbacks to share common setup or constraints between actions.
   def set_expense
     @expense = Expense.find(params[:id])
+
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
