@@ -76,6 +76,8 @@ class ExpensesController < ApplicationController
   private
   def set_meetings
     @meetings = Meeting.all
+    @accounting_years = AccountingYear.all
+    @categories = Category.all
   end
 
   private
@@ -87,7 +89,7 @@ class ExpensesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def expense_params
-    params.require(:expense).permit(:description, :receipt_url, :user_id, :meeting_id, :accepted, :bookkeeping, :euros, :paid, :date_paid, :explanation)
+    params.require(:expense).permit(:description, :receipt_url, :user_id, :meeting_id, :accepted, :bookkeeping, :euros, :paid, :date_paid, :explanation, :date, :accounting_year_id, :category_id)
   end
 
   def set_s3_direct_post

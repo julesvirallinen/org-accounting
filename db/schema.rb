@@ -11,23 +11,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170220235126) do
+ActiveRecord::Schema.define(version: 20170221143000) do
+
+  create_table "accounting_years", force: :cascade do |t|
+    t.integer  "year"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "number"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "expenses", force: :cascade do |t|
     t.string   "description"
     t.string   "receipt_url"
     t.integer  "user_id"
     t.integer  "meeting_id"
-    t.boolean  "accepted",                            default: false
+    t.boolean  "accepted",                                   default: false
     t.integer  "bookkeeping"
     t.integer  "amount"
-    t.datetime "created_at",                                          null: false
-    t.datetime "updated_at",                                          null: false
-    t.decimal  "euros",       precision: 8, scale: 2
+    t.datetime "created_at",                                                 null: false
+    t.datetime "updated_at",                                                 null: false
+    t.decimal  "euros",              precision: 8, scale: 2
     t.text     "explanation"
     t.date     "date_paid"
-    t.boolean  "paid",                                default: false
+    t.boolean  "paid",                                       default: false
+    t.integer  "category_id"
+    t.date     "date"
+    t.integer  "accounting_year_id"
   end
+
+  add_index "expenses", ["accounting_year_id"], name: "index_expenses_on_accounting_year_id"
+  add_index "expenses", ["category_id"], name: "index_expenses_on_category_id"
+  add_index "expenses", ["date"], name: "index_expenses_on_date"
 
   create_table "meetings", force: :cascade do |t|
     t.date     "date"

@@ -1,53 +1,72 @@
-<%= form_for(@expense, html: { class: 'directUpload', data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host } }) do |f| %>
+<%= form_for(@expense, html: {class: 'directUpload', data: {'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host}}) do |f| %>
     <% if @expense.errors.any? %>
         <div id="error_explanation">
-        <div id="error_explanation">
-      <h2><%= pluralize(@expense.errors.count, "error") %> prohibited this expense from being saved:</h2>
+          <div id="error_explanation">
+            <h2><%= pluralize(@expense.errors.count, "error") %> prohibited this expense from being saved:</h2>
 
-      <ul>
-      <% @expense.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+            <ul>
+              <% @expense.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :title %><br>
+      <%= f.text_field :description %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :description %>
-  </div>
+    <div class="field">
+      <%= f.label :date %><br>
+      <%= f.date_select :date %>
+    </div>
 
     <div class="field">
       <%= f.label :explanation %><br>
       <%= f.text_area :explanation %>
     </div>
 
-  <div class="field">
-    <%= f.label :receipt %> <span>Note: Tän alle pitää ilmestyä tollanen valkonen latausviiva ennen ku tää toimii, jos se ei oo siinä, päivitä sivu kunnes se on :D</span><br>
-    <%= f.file_field :receipt_url %>
-  </div>
-  <div class="field">
-    <%= f.label :meeting %><br>
-    <%= f.select :meeting_id, options_from_collection_for_select(@meetings, :id, :to_s, selected: @expense.meeting_id), :include_blank => true %>
-  </div>
+    <div class="field">
+      <%= f.label :receipt %>
+      <span>Note: Tän alle pitää ilmestyä tollanen valkonen latausviiva ennen ku tää toimii, jos se ei oo siinä, päivitä sivu kunnes se on :D</span><br>
+      <%= f.file_field :receipt_url %>
+    </div>
+    <div class="field">
+      <%= f.label :meeting %><br>
+      <%= f.select :meeting_id, options_from_collection_for_select(@meetings, :id, :to_s, selected: @expense.meeting_id), :include_blank => true %>
+    </div>
+    <div class="field">
+      <%= f.label :category %><br>
+      <%= f.select :category_id, options_from_collection_for_select(@categories, :id, :to_s, selected: @expense.category_id), :include_blank => true %>
+    </div>
     <div class="field">
       <%= f.label :euros %><br>
       <%= f.number_field :euros, value: number_to_currency(f.object.amount.to_f, delimiter: '', unit: ''), step: :any %>
     </div>
+    <div class="field">
+      <%= f.label :accounting_year %><br>
+      <%= f.select :accounting_year_id, options_from_collection_for_select(@accounting_years, :id, :to_s, selected: @expense.accounting_year_id) %>
+    </div>
     <% unless @expense.new_record? %>
 
         <div class="field">
-    <%= f.label :accepted %><br>
-    <%= f.check_box :accepted %>
-  </div>
-  <div class="field">
-    <%= f.label :bookkeeping %><br>
-    <%= f.number_field :bookkeeping %>
-  </div>
+          <%= f.label :accepted %>
+          <%= f.check_box :accepted %>
+          <%= f.label :paid %>
+          <%= f.check_box :paid %>
+        </div>
+        <div class="field">
+          <%= f.label :bookkeeping %><br>
+          <%= f.number_field :bookkeeping %>
+        </div>
+        <div class="field">
+          <%= f.label :date_paid %><br>
+          <%= f.date_select :date_paid %>
+        </div>
 
     <% end %>
 
     <div class="actions">
-    <%= f.submit %>
-  </div>
+      <%= f.submit %>
+    </div>
 <% end %>
