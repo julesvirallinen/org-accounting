@@ -27,7 +27,7 @@
         <td><%= expense.description %></td>
         <td><%= expense.user.name %></td>
         <td><%= expense.date %></td>
-        <td><%= expense.euros %></td>
+        <td><%= number_to_currency expense.euros, unit: "€", separator: ",", format: "%n%u" %></td>
         <% unless expense.paid %>
             <td class="label label-warning">Ei maksettu</td>
         <% end %>

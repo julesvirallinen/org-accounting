@@ -17,7 +17,6 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-
     unless current_user.admin?
       @user = current_user
     end

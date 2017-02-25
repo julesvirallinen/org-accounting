@@ -9,4 +9,8 @@ class Expense < ActiveRecord::Base
   validates :euros, presence: true, numericality: {greater_than: 0}
 
 
+  def value
+
+  end
+
 end

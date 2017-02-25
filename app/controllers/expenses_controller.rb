@@ -2,6 +2,7 @@ class ExpensesController < ApplicationController
   before_action :set_expense, only: [:show, :edit, :update, :destroy]
   before_action :set_meetings, only: [:edit, :update, :new, :create]
   before_action :set_s3_direct_post, only: [:new, :edit, :create, :update]
+  before_filter :admin_only, only: [:index, :destroy]
 
 
   # GET /expenses
@@ -95,4 +96,11 @@ class ExpensesController < ApplicationController
   def set_s3_direct_post
     @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
   end
+
+  def admin_only
+    unless current_user.admin?
+      redirect_to :root, :alert => "Access denied."
+    end
+  end
+
 end

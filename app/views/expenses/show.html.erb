@@ -32,7 +32,7 @@
 
 <p>
   <strong>Amount:</strong>
-  <%= @expense.euros %> €
+<td><%= number_to_currency @expense.euros, unit: "€", separator: ",", format: "%n%u" %></td>
 </p>
 
 <%= image_tag @expense.receipt_url %>
