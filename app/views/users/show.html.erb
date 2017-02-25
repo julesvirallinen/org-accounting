@@ -6,11 +6,6 @@
 </p>
 
 <p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
-
-<p>
   <strong>Account number:</strong>
   <%= @user.account_number %>
 </p>
@@ -21,10 +16,9 @@
   <tr>
     <th>Title</th>
     <th>User</th>
-    <th>Meeting</th>
-    <th>Accepted</th>
+    <th>Date</th>
     <th>Amount</th>
-    <th colspan="3"></th>
+    <th colspan="5"></th>
   </tr>
   </thead>
 
@@ -33,12 +27,17 @@
       <tr>
         <td><%= expense.description %></td>
         <td><%= expense.user.name %></td>
-        <td><%= expense.meeting.meeting if expense.meeting%></td>
-        <td><%= expense.accepted %></td>
+        <td><%= expense.date %></td>
         <td><%= expense.euros %></td>
+        <% unless expense.paid %>
+            <td class="label label-warning">Ei maksettu</td>
+        <% end %>
+        <% unless expense.accepted %>
+            <td class="label label-danger">Ei hyväksytty</td>
+        <% end %>
         <td><%= link_to 'Show', expense %></td>
         <td><%= link_to 'Edit', edit_expense_path(expense) %></td>
-        <td><%= link_to 'Destroy', expense, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', expense, method: :delete, data: {confirm: 'Are you sure?'} %></td>
       </tr>
   <% end %>
   </tbody>
