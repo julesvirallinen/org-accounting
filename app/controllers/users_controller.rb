@@ -85,13 +85,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def admin_only
-    unless current_user.admin?
-      redirect_to :root, :alert => "Access denied."
-    end
-  end
-
-
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
     params.require(:user).permit(:name, :username, :account_number, :password, :password_confirmation, :approved)

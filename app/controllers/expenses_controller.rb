@@ -97,10 +97,6 @@ class ExpensesController < ApplicationController
     @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
   end
 
-  def admin_only
-    unless current_user.admin?
-      redirect_to :root, :alert => "Access denied."
-    end
-  end
+
 
 end
