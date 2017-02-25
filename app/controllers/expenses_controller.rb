@@ -15,7 +15,7 @@ class ExpensesController < ApplicationController
     elsif params[:accepted] == "false"
       @expenses = Expense.where(accepted: false)
     else
-      @expenses = Expense.all
+      @expenses = Expense.all.order(:date)
     end
   end
 
