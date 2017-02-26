@@ -43,7 +43,7 @@
     </div>
     <div class="field">
       <%= f.label :euros %><br>
-      <%= f.number_field :euros, value: number_to_currency(f.object.amount.to_f, delimiter: '', unit: ''), step: :any %>
+      <%= f.number_field :euros, value: number_to_currency(@expense.euros.to_f, delimiter: '', unit: ''), step: :any %>
     </div>
     <div class="field">
       <%= f.label :accounting_year %><br>
