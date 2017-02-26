@@ -6,8 +6,8 @@ class User < ActiveRecord::Base
   has_many :expenses
   has_many :meetings
 
-  # validates :username, uniqueness: true,
-  #           length: {minimum: 3, maximum: 30}
+  validates :name, uniqueness: true,
+            length: {minimum: 3, maximum: 30}
 
   def active_for_authentication?
     super && approved?

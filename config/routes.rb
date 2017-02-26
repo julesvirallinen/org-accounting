@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   # devise_for :users
   resources :expenses
-  resources :users
+  resources :users, only: [:show, :edit, :update, :index]
   resources :meetings
 
 

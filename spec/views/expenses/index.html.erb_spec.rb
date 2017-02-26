@@ -7,10 +7,10 @@ RSpec.describe "expenses/index", type: :view do
         :description => "Description",
         :receipt_url => "Receipt Url",
         :user_id => 2,
-        :meeting_id => 3,
+        :meeting_id => nil,
         :accepted => false,
-        :bookkeeping => 4,
-        :amount => 5
+        :bookkeeping => nil,
+        :amount => 5.00
       ),
       Expense.create!(
         :description => "Description",
