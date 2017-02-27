@@ -1,19 +1,11 @@
 <p id="notice"><%= notice %></p>
-
+<h1><%= @meeting.meeting %></h1>
 <p>
-  <strong>Date:</strong>
-  <%= @meeting.date %>
+  <%= @meeting.date %> at <%= @meeting.place %>.
 </p>
+<h2>Hyväksytyt korvaukset:</h2>
+<%= render 'expenses/list', expenses: @meeting.expenses %>
 
-<p>
-  <strong>Meeting:</strong>
-  <%= @meeting.meeting %>
-</p>
-
-<p>
-  <strong>Place:</strong>
-  <%= @meeting.place %>
-</p>
 
 <%= link_to 'Edit', edit_meeting_path(@meeting) %> |
 <%= link_to 'Back', meetings_path %>

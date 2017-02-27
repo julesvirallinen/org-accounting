@@ -10,37 +10,8 @@
 
 </p>
 <h1>Listing Expenses</h1>
-<table class="table table-condensed">
-  <thead>
-  <tr>
-    <th>Title</th>
-    <th>User</th>
-    <th>Date</th>
-    <th>Amount</th>
-    <th colspan="5"></th>
-  </tr>
-  </thead>
+<%= render 'list', expenses: @expenses %>
 
-  <tbody>
-  <% @expenses.each do |expense| %>
-      <tr>
-        <td><%= expense.description %></td>
-        <td><%= expense.user.name %></td>
-        <td><%= expense.date %></td>
-        <td><%= number_to_currency expense.euros, unit: "€", separator: ",", format: "%n%u" %></td>
-        <% unless expense.paid %>
-            <td class="label label-warning">Ei maksettu</td>
-        <% end %>
-        <% unless expense.accepted %>
-            <td class="label label-danger">Ei hyväksytty</td>
-        <% end %>
-        <td><%= link_to 'Show', expense %></td>
-        <td><%= link_to 'Edit', edit_expense_path(expense) %></td>
-        <td><%= link_to 'Destroy', expense, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
 <br>
 
