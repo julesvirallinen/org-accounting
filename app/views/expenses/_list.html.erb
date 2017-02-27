@@ -18,7 +18,7 @@
         <td><%= expense.description %></td>
         <td><%= expense.user.name %></td>
         <td><%= expense.date %></td>
-        <td><%= expense.euros %></td>
+        <td><%= toeuros(expense.euros) %></td>
         <% unless expense.paid %>
             <td class="label label-warning">Ei maksettu</td>
         <% end %>
